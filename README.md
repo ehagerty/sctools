@@ -66,7 +66,7 @@ $ ./autogen.sh --prefix=/usr --sysconfdir=/etc
 
 On Linux, udev rules for the converter will also be installed in
 ``$(sysconfdir)/udev/rules.d`` which will give cause the converter to be
-owned by the ``plugdev`` group, with permissions of 0660. Thus, you may
+owned by the ``input`` group, with permissions of 0660. Thus, you may
 want to pass ``--sysconfdir=/etc`` to configure.
 
 Looking up Keys

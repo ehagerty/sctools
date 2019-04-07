@@ -7,7 +7,7 @@
 #
 
 # libusb
-ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="047d", SUBSYSTEM=="usb", MODE="660", GROUP="plugdev"
+ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="047d", SUBSYSTEM=="usb", MODE="660", GROUP="input"
 
 # hidraw
-KERNEL=="hidraw*", ATTRS{busnum}=="1", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="047d", MODE="0660", GROUP="plugdev"
+KERNEL=="hidraw*", ATTRS{busnum}=="1", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="047d", MODE="0660", GROUP="input"

@@ -23,3 +23,6 @@ libtool
 .libs
 *.log
 test?
+src/scas
+src/scdis
+src/sctool
