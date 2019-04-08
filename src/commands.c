@@ -131,7 +131,7 @@ static int do_info(hid_device *dev, int argc, char *argv[])
 			       buf[i + 1] + 256 * buf[i + 2]);
 		break;
 		case IC_RAM_FREE:
-			printf("SRAM Free: %d bnytes\n",
+			printf("SRAM Free: %d bytes\n",
 			       buf[i + 1] + 256 * buf[i + 2]);
 		break;
 		case IC_EEPROM_SIZE:
