@@ -331,8 +331,8 @@ static int do_write(hid_device *dev, int argc, char *argv[])
 
 	/* Buffer in the data and write it out */
 	do {
-		if (!feof(fp) &&
-		   !(i = fread(filebuf + bytes_in, 1, BUFSIZ - bytes_in, fp))) {
+		if (feof(fp) ||
+		    !(i = fread(filebuf + bytes_in, 1, PACKET_LEN - 4, fp))) {
 			fputs("Failed to read from file\n", stderr);
 			goto err;
 		}
@@ -344,7 +344,7 @@ static int do_write(hid_device *dev, int argc, char *argv[])
 		} else printf("Device ready\n");
 
 		max_len = 2 + (bytes_in - bytes_out) + i;
-		max_len =(max_len > 60) ? 60 : max_len;
+		max_len = (max_len > PACKET_LEN - 4) ? PACKET_LEN - 4 : max_len;
 		buf[1] = max_len & 0xff;
 		buf[2] = bytes_out & 0xff;
 		buf[3] = (bytes_out >> 8) & 0xff;
@@ -355,10 +355,10 @@ static int do_write(hid_device *dev, int argc, char *argv[])
 			goto err;
 		}
 
-		bytes_in  += i;
+		bytes_in  += max_len;
 		bytes_out += max_len;
 		printf("%lu / %lu bytes written\n", bytes_out - 4, len);
-	} while (bytes_out < len && !ferror(fp));
+	} while (bytes_out - 4 < len && !ferror(fp));
 
 	if (hid_read_timeout(dev, buf, PACKET_LEN + 1, 2500) < 0 ||
 	    buf[0] != RC_COMPLETED) {
