@@ -53,6 +53,9 @@ under its included BSD license.
 Installation
 ------------
 
+**NOTE: Be sure to pass ``--recursive`` to git clone to include the hidapi
+submodule, otherwise the build will fail.**
+
 Building ``sctools`` is as simple as:
 ```
 $ ./autogen.sh && make && make install
